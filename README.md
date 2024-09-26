@@ -21,5 +21,64 @@ tar. Эмулятор должен работать в режиме GUI.
 1. chown.
 2. history.
 3. find.
+
 Все функции эмулятора должны быть покрыты тестами, а для каждой из
 поддерживаемых команд необходимо написать 2 теста.
+
+# Тесты
+## ls
+1. Предусловие: **cd /**
+
+   Проверка: **ls**
+
+   Ожидаемый результат: **sample-1**
+2. Предусловие: **cd /sample-1**
+
+   Проверка: **ls**
+
+   Ожидаемый результат: **sample-1.webp sample-1_1.webp sample-5 (1).jpg sample-5.webp**
+## cd
+1. Предусловие: **cd /**
+
+   Проверка: **cd sample-1**
+
+   Ожидаемый результат: ls -> **sample-1.webp sample-1_1.webp sample-5 (1).jpg sample-5.webp**
+2. Предусловие: **cd /sample-1**
+
+   Проверка: **cd ..**
+
+   Ожидаемый результат: ls -> **sample-1**
+## exit
+1. Проверка: **exit**
+   Ожидаемый результат: программа завершила работу
+## chown
+1. Предусловие: dir sample-1 is owned by Platon, Username Platon
+
+   Проверка: **chown root /sample-1**
+
+   Ожидаемый результат: dir sample-1 is owned by root
+2. Предусловие: ir sample-1 is owned by root, Username Platon
+
+   Проверка: **chown Platon /sample-1**
+
+   Ожидаемый результат: access error
+## history
+1. Предусловие: **ls**
+
+   Проверка: **history**
+
+   Ожидаемый результат: **1 ls**
+2. Предусловие: **cd /sample-1**; **ls**
+
+   Проверка: **history**
+
+   Ожидаемый результат: **1 cd /sample-1 2 ls**
+## find
+1. Проверка: **find -name "*.webp" **
+
+   Ожидаемый результат: **/sample-1/sample-1.webp
+/sample-1/sample-1_1.webp
+/sample-1/sample-5.webp**
+2. Проверка: **find -type d**
+
+   Ожидаемый результат: **/sample-1**
