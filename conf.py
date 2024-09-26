@@ -48,7 +48,10 @@ def setup():
 
             json.dump(data["log"], logfile)
             print(data["log"])
-            root.destroy()
+            try:
+                root.destroy()
+            except Exception:
+                pass
     except FileNotFoundError:
         print('Unable to open tar, json or sh file')
 
